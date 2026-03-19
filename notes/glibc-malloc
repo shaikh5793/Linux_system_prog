@@ -1,0 +1,31 @@
+Alignment:                              2 * sizeof(size_t) (default)
+       (i.e., 8 byte alignment with 4byte size_t). This suffices for
+       nearly all current machines and C compilers. However, you can
+       define MALLOC_ALIGNMENT to be wider than this if necessary.
+
+Minimum overhead per allocated chunk:   4 or 8 bytes
+       Each malloced chunk has a hidden word of overhead holding size
+       and status information.
+
+Minimum allocated size: 4-byte ptrs:  16 bytes    (including 4 overhead)
+                        8-byte ptrs:  24/32 bytes (including, 4/8 overhead)
+
+
+
+An allocated chunk looks like this:
+
+
+    chunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+            |             Size of previous chunk, if allocated            | |
+            +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+            |             Size of chunk, in bytes                       |M|P|
+      mem-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+            |             User data starts here...                          .
+            .                                                               .
+            .             (malloc_usable_size() bytes)                      .
+            .                                                               |
+nextchunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+            |             Size of chunk                                     |
+            +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+

@@ -1,0 +1,46 @@
+Compiler
+    |
+    |_ produce object files with unresolved symbols
+    |
+    |_ Linker
+        |
+        |_ load object files and libraries
+        |
+        |_ resolve symbols in object files and libraries
+        |
+        |_ create output file with resolved symbols
+        |
+        |_ create Global Offset Table (GOT) and Procedure Linkage Table (PLT)
+        |
+        |_ dynamic linker
+            |
+            |_ at runtime, use GOT and PLT to resolve and link to dynamic libraries
+            |
+            |_ update GOT and PLT as necessary
+
+
+This flowchart shows the progression of dynamic linkage handled by a linker starting from the object files produced by the compiler that contain unresolved symbols. Then it's passed to the linker which loads the object files and libraries and resolves the symbols in them. The linker creates the output file with resolved symbols and also creates the Global Offset Table (GOT) and Procedure Linkage Table (PLT) that are used by the dynamic linker at runtime to resolve and link to dynamic libraries. The dynamic linker also updates the GOT and PLT as necessary.
+
+It's important to note that this is a high-level flowchart, there are many other functions, sub-functions, and layers that are involved in the dynamic linkage process. The specific implementation of each function also depends on the exact version of the linker and the operating system that are being used.
+
+
+
+
+runtime linkage
+
+Executable image
+    |
+    |_ start of the process
+    |    |
+    |    |_ dynamic linker
+    |        |
+    |        |_ load shared libraries
+    |        |
+    |        |_ resolve symbols in shared libraries
+    |        |
+    |        |_ create Global Offset Table (GOT) and Procedure Linkage Table (PLT)
+    |        |
+    |        |_ relocate symbols in the executable image
+    |        |
+    |        |_ update GOT and PLT as necessary
+

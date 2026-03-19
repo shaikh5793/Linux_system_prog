@@ -1,0 +1,32 @@
+1. allocate 1024 bytes of memory
+
+void clean1(void *p){
+    free(ptr);
+}
+
+void clean1(void *p){
+    free(ptr1);
+}
+   ptr =  malloc(1024);
+   if(!ptr)
+        perror("malloc failed\n");
+   
+   pthread_cleanup_push(clean1, NULL);
+   ptr1 = malloc(2048);
+   if(!ptr1)
+       pthread_exit();
+
+   pthread_cleanup_push(clean2, NULL);
+        
+    ptr2 = malloc(2048);
+    if(!ptr2)
+           pthread_exit();
+
+       ...
+       ...
+       ...
+       ...
+
+
+    pthread_cleanup_pop(1);//clean2 is executed and removed
+    pthread_cleanup_pop(1);// clean1 is executed and removed

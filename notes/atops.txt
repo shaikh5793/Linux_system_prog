@@ -1,0 +1,129 @@
+static int glob = 0;
+
+static void *threadFunc(void *arg) 
+{ 
+    int local,j; 
+    int loops = *((int *)arg);
+    for (j = 0; j < loops; j++) {
+        local = glob;
+        local++;
+        glob = local; 
+    }
+    return NULL;
+
+}
+
+To fix this, we must do the load-add-store in a single step --- We call
+this an atomic operation --- We are saying: "Do this, and don't get
+interrupted while doing this."
+
+"Atomic" in this context means "all or nothing"
+
+--- either we succeed in completing the operation with no interruptions
+or we fail to even begin the operation (because someone else was doing
+an atomic operation)
+
+--- We really mean "atomic" AND "isolated" from other threads(CPU's).
+
+"machine instructions" that read or change data in single un-interrupted
+step are called atomic operations, various processor Instruction set
+Architechures support atomic instructions
+
+Common atomic instructions:
+
+1.  Fetch-And-Add
+
+    -   Atomically increments a value while returning the old value at a
+        particular address.
+
+    -   The C pseudocode for the fetch-and-add instruction looks like
+        this:
+
+        int FetchAndAdd(int *addr) 
+        { 
+           int old = *addr;
+          *addr = old + 1;
+           return old; 
+        }
+
+2.  Test-and-Set
+
+    int TestAndSet(int *old_ptr, int new) 
+    { 
+        int old = *old_ptr; // fetch old value at old_ptr 
+        *old_ptr = new; // store 'new' into old_ptr
+         return old; // return the old value 
+    }
+
+    -   "test and set" enables you to "test" the old value (which is
+        what is returned) while simultaneously "setting" the memory
+        location to a new value.
+
+    -   This instruction has different names --- on SPARC it is the
+        load/store unsigned byte instruction(ldstub), on x86 it is the
+        atomic exchange instruction (xchg) --- but basically does the
+        same thing across platforms, and is generally referred to as
+        "test-and-set"
+
+        GNUC-Compiler macro : __sync_lock_test_and_set(int *p, int
+        value);
+
+3.  Compare-And-Swap
+
+    Another hardware premitive that some systems provide is known as the
+    compare-and-swap instruction (as it is called on SPARC) it is called
+    compare-and-exchange on x86.
+
+    int CompareAndSwap(int *ptr, int expected, int new) 
+    { 
+      int actual = *ptr; 
+      if (actual == expected) 
+            *ptr = new; 
+      return actual;
+
+    }
+
+    The basic idea is for compare-and-swap to test whether the value at
+    the address specified by 'ptr' is equal to 'expected'; if so, update
+    the memory location pointed to by 'ptr'with the new value. If not,
+    do nothing. In either case, return the actual value at that memory
+    location, thus allowing the code calling compare-and-swap to know
+    whether it succeeded or not.
+
+    GNU-COMPILER maco: __sync_val_compare_and_swap(int *ptr, int compare, int swap);
+
+4.  Load-Linked and Store-Conditional
+
+    -   Implemented by architectures like Mips,Arm,PowerPC,Alpha
+
+    -   'C' Pseudocode:
+
+    int LoadLinked(int *addr) 
+    { 
+        return *addr; 
+    }
+
+    int StoreConditional(int *addr, int value) 
+    { 
+        if (no one has updated *addr since the LoadLinked to this address)
+        { 
+            *addr = value; 
+            return 1; // success! 
+        } 
+    else{ 
+           return 0; // failed to update 
+        }
+    }
+
+    -   Implemented by architectures like Mips,Arm,PowerPC,Alpha
+
+    -   The load-linked operates much like a typical load instruction,
+        and simply fetches a value from memory and places it in a
+        register. The key difference comes with the store-conditional,
+        which only succeeds (and updates the value stored at the address
+        just load-linked from) if no intervening store to the address
+        has taken place.
+
+    -   In the case of success, the store-conditional returns 1 and
+        updates the value at ptr to value; if it fails, the value at ptr
+        is not updated and 0 is returned

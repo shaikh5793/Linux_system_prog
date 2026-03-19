@@ -1,0 +1,39 @@
+# Natural Alignment
+
+-   An Allocation is considered to be naturally aligned if its start
+    address is evenly divisible by size.
+
+-   When accessing N bytes of memory, the base memory address must be
+    evenly divisible by N,i.e. addr % N == 0.
+
+-   Unaligned memory access occurs when an attempt is made to read N
+    bytes of data starting from an address that is not evenly divisible
+    by N (i.e. addr % N != 0).
+
+    For instance , reading 4 bytes of data from address 0x10004 is fine,
+    but reading 4 bytes of data from address 0x10005 would be an
+    unaligned memory access.
+
+# Effects of unaligned Access
+
+The effects of performing an unaligned memory access vary from
+architecture to architecture.
+
+-   Some architectures are able to perform unaligned memory accesses
+    transparently, but there is usually a significant performance cost.
+
+-   Some architectures raise processor exceptions with required meta
+    data. Kernel's exception handlers are programmed to correct the
+    unaligned access, at significant cost to performance.
+
+-   Some architectures raise faults when unaligned accesses happen, such
+    faults do not generate enough information for the unaligned access
+    to be corrected by kernel's fault handlers.
+
+Note: if your code causes unaligned memory accesses to happen, it will
+not work correctly on certain platforms and will cause performance
+problems on others.
+
+      writing code that satisfies natural alignment 
+      requirements is the easiest way to achieve full 
+      portability.

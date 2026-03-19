@@ -1,0 +1,121 @@
+/*
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ * ******************************************************************************
+ * This program is part of the source code provided with "Linux Systems Programming" Course
+ * (c) 2019- 2021 Techveda, Hyderabad, India
+ * website : www.techveda.org
+ * Author/Trainer:  Raghu Bharadwaj
+ * ******************************************************************************
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *
+ */
+
+
+/* mq_notify_sig.c
+
+   Demonstrate message notification via signals (catching the signals with
+   a signal handler) on a POSIX message queue.
+
+*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <errno.h>
+#include <signal.h>
+#include <mqueue.h>
+#include <fcntl.h>              /* For definition of O_NONBLOCK */
+
+
+#define DEATH(mess) { perror(mess); exit(errno); }
+
+#define NOTIFY_SIG SIGUSR1
+
+#define NAME "/mymq"
+
+static void handler(int sig)
+{
+	printf("\n%s:\n",__func__);
+	printf("\n Singal \n");
+    /* Just interrupt sigsuspend() */
+}
+
+int main()
+{
+    struct sigevent sev;
+    mqd_t mqd;
+    struct mq_attr attr;
+    void *buffer;
+    ssize_t numRead;
+    sigset_t blockMask, emptyMask;
+    struct sigaction sa;
+
+
+    mqd = mq_open(NAME, O_CREAT | O_RDONLY);
+    if (mqd == (mqd_t) -1) 
+        DEATH("mq_open");
+
+    /* Determine mq_msgsize for message queue, and allocate an input buffer
+       of that size */
+
+    if (mq_getattr(mqd, &attr) == -1)
+        DEATH("mq_getattr");
+
+    buffer = malloc(attr.mq_msgsize);
+    if (buffer == NULL) 
+        DEATH("malloc");
+
+       
+
+    /* Block the notification signal and establish a handler for it */
+
+   sigemptyset(&blockMask);
+    sigaddset(&blockMask, NOTIFY_SIG);
+
+    if (sigprocmask(SIG_BLOCK, &blockMask, NULL) == -1)
+        DEATH("sigprocmask");
+	
+
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    sa.sa_handler = handler;
+    if (sigaction(NOTIFY_SIG, &sa, NULL) == -1)
+        DEATH ("sigaction");
+
+    /* Register for message notification via a signal */
+
+    sev.sigev_notify = SIGEV_SIGNAL;
+    sev.sigev_signo = NOTIFY_SIG;
+    if (mq_notify(mqd, &sev) == -1) 
+        DEATH ("mq_notify");
+
+    sigemptyset(&emptyMask);
+
+    for (;;) {
+        sigsuspend(&emptyMask);         /* Wait for notification signal */
+	
+	
+	while ((numRead = mq_receive(mqd, buffer, attr.mq_msgsize, NULL)) >= 0)
+            printf("Read %ld bytes\n", (long) numRead);
+
+
+        /* Reregister for message notification */
+
+        if (mq_notify(mqd, &sev) == -1)
+            DEATH ("mq_notify");
+
+    }
+}
