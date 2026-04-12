@@ -1,8 +1,4 @@
-/*
- * Copyright (c) 2024 Techveda
- * Author: Raghu Bharadwaj
- * SPDX-License-Identifier: MIT
- */
+
 #include <stdio.h>
 
 void lib2_func1(void)
