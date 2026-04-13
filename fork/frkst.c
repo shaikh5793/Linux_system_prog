@@ -6,11 +6,6 @@
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  * ******************************************************************************
- * This program is part of the source code provided with "Linux Systems Programming" Course
- * (c) 2019- 2021 Techveda, Hyderabad, India
- * website : www.techveda.org
- * Author/Trainer:  Raghu Bharadwaj
- * ******************************************************************************
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  *

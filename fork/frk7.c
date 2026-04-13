@@ -6,11 +6,6 @@
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  * ******************************************************************************
- * This program is part of the source code provided with "Linux Systems Programming" Course
- * (c) 2019- 2021 Techveda, Hyderabad, India
- * website : www.techveda.org
- * Author/Trainer:  Raghu Bharadwaj
- * ******************************************************************************
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  *
@@ -39,9 +34,9 @@ int main()
 	char buf[2];
 	pid_t cpid;
 	int childstatus;
-//	fd = open("./test", O_RDONLY); // abcd
+	fd = open("./test", O_RDONLY); // abcd
 	cpid = fork();
-	fd = open("./test", O_RDONLY);
+//d = open("./test", O_RDONLY);
 	if (cpid == CHILD) {
 		printf("%s: child process id %d\n",__func__, getpid());
 		read(fd, buf, 2);
