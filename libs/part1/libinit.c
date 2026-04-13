@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2024 Techveda
- * Author: Raghu Bharadwaj
+ * Copyright (c) 2024 
+ * Author: Shaikh shehajadali
  * SPDX-License-Identifier: MIT
  */
 #include <stdio.h>
