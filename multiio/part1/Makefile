@@ -1,7 +1,4 @@
 # Part 1: Basic I/O and select() - Makefile
-# Copyright (c) 2024 Techveda, Hyderabad, India
-# Author: Raghu Bharadwaj | www.techveda.org
-
 # Compiler settings
 CC := gcc
 CFLAGS := -Wall -Wextra -std=c11 -O2

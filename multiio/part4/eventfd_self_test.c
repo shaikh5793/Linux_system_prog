@@ -1,10 +1,4 @@
 /*
- * Copyright (c) 2024 Techveda
- * Author: Raghu Bharadwaj
- * SPDX-License-Identifier: MIT
- *
- * Website: www.techveda.org
- * Email: raghu@techveda.org
  *
  * Self-contained eventfd Example
  * Demonstrates eventfd functionality using fork() to create child process

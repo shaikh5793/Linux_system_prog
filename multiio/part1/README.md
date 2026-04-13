@@ -1,10 +1,5 @@
 # Part 1: Basic I/O and select()
 
-**Author:** Raghu Bharadwaj  
-**Organization:** Techveda, Hyderabad, India  
-**Website:** www.techveda.org  
-**Course:** Linux Systems Programming  
-**License:** MIT License  
 
 ## Overview
 

@@ -1,6 +1,5 @@
 # Part 4: Advanced Linux File Descriptors - Makefile
-# Copyright (c) 2024 Techveda, Hyderabad, India
-# Author: Raghu Bharadwaj | www.techveda.org
+
 
 # Compiler settings
 CC := gcc

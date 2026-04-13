@@ -1,10 +1,5 @@
 /*
- * Copyright (c) 2024 Techveda
- * Author: Raghu Bharadwaj
- * SPDX-License-Identifier: MIT
- *
- * Website: www.techveda.org
- * Email: raghu@techveda.org
+ * 
  *
  * Simple eventfd Example
  * Shows how to use eventfd for simple event notifications between threads/processes with epoll.

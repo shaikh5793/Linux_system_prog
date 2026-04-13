@@ -1,10 +1,4 @@
 /*
- * Copyright (c) 2024 Techveda
- * Author: Raghu Bharadwaj
- * SPDX-License-Identifier: MIT
- *
- * Website: www.techveda.org
- * Email: raghu@techveda.org
  *
  * Basic blocking I/O on multiple file descriptors.
  */
@@ -37,7 +31,7 @@ int main()
 		exit(EXIT_FAILURE);
 	}
 
-	printf("=== Techveda Multi-I/O Demo ===\n");
+	printf("===  Multi-I/O Demo ===\n");
 	printf("Trying to read from pone\n");
 	/* Read from the first pipe. This is a blocking call. */
 	/* The program will wait here until there is data to be read from the pipe. */

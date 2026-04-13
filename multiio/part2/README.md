@@ -1,10 +1,6 @@
 # Part 2: poll() - Modern I/O Multiplexing
 
-**Author:** Raghu Bharadwaj  
-**Organization:** Techveda, Hyderabad, India  
-**Website:** www.techveda.org  
-**Course:** Linux Systems Programming  
-**License:** MIT License  
+ 
 
 ## Overview
 

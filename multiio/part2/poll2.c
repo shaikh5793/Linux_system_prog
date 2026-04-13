@@ -1,10 +1,5 @@
 /*
- * Copyright (c) 2024 Techveda
- * Author: Raghu Bharadwaj
- * SPDX-License-Identifier: MIT
- *
- * Website: www.techveda.org
- * Email: raghu@techveda.org
+ * 
  *
  * Uses poll() for I/O multiplexing with an infinite timeout.
  */

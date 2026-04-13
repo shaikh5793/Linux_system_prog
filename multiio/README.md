@@ -1,7 +1,5 @@
 # Linux Multi-I/O Examples
 
-**Copyright (c) 2024 Techveda, Hyderabad, India**  
-**Author: Raghu Bharadwaj | www.techveda.org**
 
 ## Course Structure
 

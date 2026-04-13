@@ -1,7 +1,5 @@
 # Part 3: epoll() - High-Performance I/O Multiplexing
 
-**Copyright (c) 2024 Techveda, Hyderabad, India**  
-**Author: Raghu Bharadwaj | www.techveda.org**
 
 ## Overview
 

@@ -6,12 +6,7 @@
  * the Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
  *
- * ******************************************************************************
- * This program is part of the source code provided with
- * "Linux Systems Programming Essentials" Course offered by TECHVEDA(c) 2020 - 2022
- * Course page : https://www.techveda.org/linuxsysprg
- * Trainer:  Raghu Bharadwaj
- * ******************************************************************************
+ * *******************************************************************************
  *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.

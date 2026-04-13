@@ -1,10 +1,4 @@
 /*
- * Copyright (c) 2024 Techveda
- * Author: Raghu Bharadwaj
- * SPDX-License-Identifier: MIT
- *
- * Website: www.techveda.org
- * Email: raghu@techveda.org
  *
  * Simple timerfd Example
  * Shows how to receive timer expirations as file descriptor events using timerfd with epoll.

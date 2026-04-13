@@ -1,10 +1,5 @@
 /*
- * Copyright (c) 2024 Techveda
- * Author: Raghu Bharadwaj
- * SPDX-License-Identifier: MIT
  *
- * Website: www.techveda.org
- * Email: raghu@techveda.org
  *
  * Helper program for epoll Edge-Triggered vs. Level-Triggered demonstration.
  */

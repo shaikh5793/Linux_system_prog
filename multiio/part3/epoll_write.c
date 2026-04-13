@@ -1,10 +1,5 @@
 /*
- * Copyright (c) 2024 Techveda
- * Author: Raghu Bharadwaj
- * SPDX-License-Identifier: MIT
- *
- * Website: www.techveda.org
- * Email: raghu@techveda.org
+ * 
  *
  * Simple EPOLLOUT Example
  * Demonstrates how to detect write readiness on a non-blocking file descriptor.

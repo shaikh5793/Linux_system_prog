@@ -1,10 +1,6 @@
 /*
- * Copyright (c) 2024 Techveda
- * Author: Raghu Bharadwaj
- * SPDX-License-Identifier: MIT
+ * 
  *
- * Website: www.techveda.org
- * Email: raghu@techveda.org
  *
  * Simple signalfd Example
  * Demonstrates how to receive signals as file descriptor events using signalfd with epoll.

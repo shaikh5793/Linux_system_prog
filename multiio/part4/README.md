@@ -1,7 +1,5 @@
 # Part 4: Advanced Linux File Descriptors
 
-**Copyright (c) 2024 Techveda, Hyderabad, India**  
-**Author: Raghu Bharadwaj | www.techveda.org**
 
 ## Overview
 

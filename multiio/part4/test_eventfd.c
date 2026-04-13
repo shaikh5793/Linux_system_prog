@@ -1,10 +1,5 @@
 /*
- * Copyright (c) 2024 Techveda
- * Author: Raghu Bharadwaj
- * SPDX-License-Identifier: MIT
- *
- * Website: www.techveda.org
- * Email: raghu@techveda.org
+ * 
  *
  * Simple test program to signal an eventfd
  * Usage: ./test_eventfd <pid> <fd> <value>
